@@ -218,7 +218,7 @@ void draw(){
   motorright = (int)constrain((y + x)*127, -127, 127);
   motorlat = (int)(x * 127);
   motorelev = (int)(e * 127);
-  servo = (int)(srv * 255);
+  servo = (int)(srv * 127);
   ec = 0;
   
   //display motor output
@@ -232,7 +232,7 @@ void draw(){
   //send motor output
   if ( millis() - lastSend > 100) { //minimum time between msg = 100ms
     lastSend = millis();
-    printToArduino(-motorleft,  -motorright,  -motorelev,  motorlat, servo); //negatives for correct polarity
+    printToArduino(-motorleft,  -motorright,  -motorelev, servo); //negatives for correct polarity
     
     if (commsError) { //if not connected, attempt reconnect
        if (Serial.list().length == 1) {
