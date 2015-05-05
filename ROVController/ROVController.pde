@@ -191,10 +191,10 @@ void draw(){
     
     //servo
     if (srvo > 0){
-      srv = 1.0;
+      srv = 165.0; //degree of claw opening
     }
     else if (srvc > 0){
-      srv = 0.0;
+      srv = 30.0; //degree of claw closing
     }
     
   }
@@ -218,7 +218,7 @@ void draw(){
   motorright = (int)constrain((y + x)*127, -127, 127);
   motorlat = (int)(x * 127);
   motorelev = (int)(e * 127);
-  servo = (int)(srv * 127);
+  servo = (int)(srv);
   ec = 0;
   
   //display motor output
@@ -227,12 +227,12 @@ void draw(){
   rect(800, 227, 50, motorright);
   rect(727, 425, (r*127), 50);
   rect(700, 227, 50, motorelev);
-  rect(900, 227, 50, (srv * 127));
+  rect(900, 227, 50, (srv));
   
   //send motor output
   if ( millis() - lastSend > 100) { //minimum time between msg = 100ms
     lastSend = millis();
-    printToArduino(-motorleft,  -motorright,  -motorelev, servo); //negatives for correct polarity
+    printToArduino(-motorleft,  -motorright,  -motorelev, servo, motorlat); //negatives for correct polarity
     
     if (commsError) { //if not connected, attempt reconnect
        if (Serial.list().length == 1) {
@@ -249,7 +249,7 @@ void printToArduino(int m1,  int m2,  int m3,  int m4, int s1) {
     m1 += 127;
     m2 += 127;
     m3 += 127;
-    m4 += 127;
+    m4 += 30;
     println('T' + hex(m1,2) + hex(m2,2) + hex(m3,2) + hex(m4,2) + hex(s1,2)); //debug
     port.write('T' + hex(m1,2) + hex(m2,2) + hex(m3,2) + hex(m4,2) + hex(s1,2));
   }
