@@ -23,8 +23,9 @@ int motorright = 0; //throttle of right motor
 int motorelev = 0; //throttle of elevation motor
 int motorlat = 0; //throttle of lateral motor
 int servo = 0; //servo for arm
+int srv = 0;
 
-float x, y, r, s, e, b, ec, srv, srvo, srvc; //controller values
+float x, y, r, s, e, b, ec, srvo, srvc; //controller values
 long lastSend; //last millisecond to send message to Arduino
 PFont bigfont;
 PImage ping;
@@ -191,10 +192,10 @@ void draw(){
     
     //servo
     if (srvo > 0){
-      srv = 165.0; //degree of claw opening
+      srv = 55; //degree of claw opening
     }
     else if (srvc > 0){
-      srv = 30.0; //degree of claw closing
+      srv = 0; //degree of claw closing
     }
     
   }
@@ -249,7 +250,7 @@ void printToArduino(int m1,  int m2,  int m3,  int m4, int s1) {
     m1 += 127;
     m2 += 127;
     m3 += 127;
-    m4 += 30;
+    m4 += 0;
     println('T' + hex(m1,2) + hex(m2,2) + hex(m3,2) + hex(m4,2) + hex(s1,2)); //debug
     port.write('T' + hex(m1,2) + hex(m2,2) + hex(m3,2) + hex(m4,2) + hex(s1,2));
   }

@@ -40,7 +40,8 @@ void loop() {
                 mc1.writeMicroseconds( 75 * (hex2dec(buffer[0]) * 16 + hex2dec(buffer[1])) / 16 + 905 );
                 mc2.writeMicroseconds( 75 * (hex2dec(buffer[2]) * 16 + hex2dec(buffer[3])) / 16 + 905 );
                 mc3.writeMicroseconds( 75 * (hex2dec(buffer[4]) * 16 + hex2dec(buffer[5])) / 16 + 905 );
-                mc4.writeMicroseconds( 75 * (hex2dec(buffer[6]) * 16 + hex2dec(buffer[7])) / 16 + 905 );
+                //mc4.writeMicroseconds( 75 * (hex2dec(buffer[6]) * 16 + hex2dec(buffer[7])) / 16 + 905 );
+                mc4.write(( 75 * (hex2dec(buffer[6]) * 16 + hex2dec(buffer[7])) / 16)*2);
                 sc1.writeMicroseconds( 100 * (hex2dec(buffer[8]) * 16 + hex2dec(buffer[9])) / 17 + 750 );
         }
 
